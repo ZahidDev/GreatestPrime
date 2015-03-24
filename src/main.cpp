@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool Is_Prime(unsigned long long Number) //Checks for Prime Validity
+bool isPrime(unsigned long long Number) //Checks for Prime Validity
 {
     unsigned long long iterate = 2;
     bool isPrime = 1;
@@ -54,11 +54,11 @@ int main()
 	cout << "              Max Prime Finder V3.0b                 " << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
 	
-	char contin = 'y';
-	while(contin == 'y' || contin == 'Y')
+	char userContinue = 'y';
+	while(userContinue == 'y' || userContinue == 'Y')
 	{
 		cout << "High Range #: ";
-		unsigned long long maxNum;
+		unsigned long long maxNum = 2;
 		cin >> maxNum;
 		while(maxNum < 1)
 		{
@@ -72,8 +72,8 @@ int main()
 		}
 		else
 		{	
-			char nextMax = 'y';
-			while(nextMax == 'y' || nextMax == 'Y')
+			char nextMaxPrime = 'y';
+			while(nextMaxPrime == 'y' || nextMaxPrime == 'Y')
 			{
 				//DEBUG
 				using namespace std::chrono;
@@ -100,16 +100,16 @@ int main()
 				<< " milliseconds~~        \n"<<endl;
 				
 				cout << "Would you like the next Highest Prime #?(y/n) ";
-				cin >> nextMax;
+				cin >> nextMaxPrime;
 				cout << endl;
 				
-				if(nextMax == 'Y' || 'y')
+				if(nextMaxPrime == 'Y' || 'y')
 					maxNum = maxPrime - 1;
 			}
 		}
 		
 		cout << "\nRestart?(y/n) ";
-		cin >> contin;
+		cin >> userContinue;
 	}
 	
 	return 0;
