@@ -1,51 +1,10 @@
 #include <iostream>
-#include <math.h>
-
+#include "isPrime.h"
+#include "LargestPrime.h"
 //DEBUG
 //#include <chrono>
 
 using namespace std;
-
-bool isPrime(unsigned long long Number) //Checks for Prime Validity
-{
-    unsigned long long iterate = 2;
-    bool isPrime = 1;
-    float half = Number/2;
-
-    while( isPrime && iterate <= half )
-    {
-        if ( Number % iterate == 0 )
-          isPrime = 0;
-        iterate++;
-    }
-
-    return isPrime;
-}
-
-auto LargestPrime(unsigned long long upperBound)	//Eratosthenes Sieve Algorithm
-{
-	auto upperBoundSquareRoot = sqrt(upperBound);	//uses the sqrt of the upperBound(max) as minValue
-	bool *isComposite = new bool[upperBound + 1];	//Bit array to mark composite #s
-	for (unsigned long long m = 2; m <= upperBoundSquareRoot; m++) {
-		if (!isComposite[m]) {
-			for (unsigned long long k = m * m; k <= upperBound; k += m)	//makes all multiples of prime #s composite
-				isComposite[k] = true;
-		}
-	}
-
-	unsigned long long maxPrime = 2;
-	for (unsigned long long m = upperBound; m >= upperBoundSquareRoot; m--)	//Finds Largest Prime # in range
-	{
-		if(!isComposite[m]) {
-			maxPrime = m;
-			break;
-		}
-	}
-
-	delete [] isComposite;
-	return maxPrime;
-}
-
 
 int main()
 {
@@ -54,7 +13,7 @@ int main()
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
 	
 	char userContinue = 'y';
-	while(userContinue == 'y' || userContinue == 'Y')
+	while(userContinue == 'y')
 	{
 		cout << "High Range #: ";
 		unsigned long long maxNum = 2;
@@ -72,7 +31,7 @@ int main()
 		else
 		{	
 			char nextMaxPrime = 'y';
-			while(nextMaxPrime == 'y' || nextMaxPrime == 'Y')
+			while(nextMaxPrime == 'y')
 			{
 				//DEBUG
 				//using namespace std::chrono;
@@ -85,7 +44,7 @@ int main()
 				//DEBUG
 				//auto start = high_resolution_clock::now();
 
-				auto maxPrime = LargestPrime(maxNum);
+				auto maxPrime = largestPrime(maxNum);
 			
 				//DEBUG				
 				//auto end = high_resolution_clock::now();
@@ -100,15 +59,18 @@ int main()
 				
 				cout << "Would you like the next Highest Prime #?(y/n) ";
 				cin >> nextMaxPrime;
+
+				cout << largestPrime(100) << endl;
 				cout << endl;
-				
-				if(nextMaxPrime == 'Y' || 'y')
+
+				if(nextMaxPrime == 'y')
 					maxNum = maxPrime - 1;
 			}
 		}
 		
 		cout << "\nRestart?(y/n) ";
 		cin >> userContinue;
+		userContinue = tolower(userContinue);
 	}
 	
 	return 0;
