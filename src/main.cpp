@@ -59,8 +59,6 @@ int main()
 				
 				cout << "Would you like the next Highest Prime #?(y/n) ";
 				cin >> nextMaxPrime;
-
-				cout << largestPrime(100) << endl;
 				cout << endl;
 
 				if(nextMaxPrime == 'y')
