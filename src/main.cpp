@@ -1,9 +1,8 @@
 #include <iostream>
-#include <string>
 #include <math.h>
 
 //DEBUG
-#include <chrono>
+//#include <chrono>
 
 using namespace std;
 
@@ -76,28 +75,28 @@ int main()
 			while(nextMaxPrime == 'y' || nextMaxPrime == 'Y')
 			{
 				//DEBUG
-				using namespace std::chrono;
+				//using namespace std::chrono;
 
-				if(Is_Prime(maxNum)) {
+				if(isPrime(maxNum)) {
 					cout<<"The number " << maxNum << " is prime"<<endl;
 				}
 				else cout<<"The number "<< maxNum << " isn't prime"<<endl;
 
 				//DEBUG
-				auto start = high_resolution_clock::now();
+				//auto start = high_resolution_clock::now();
 
 				auto maxPrime = LargestPrime(maxNum);
 			
 				//DEBUG				
-				auto end = high_resolution_clock::now();
-				auto timeSpan = duration_cast<milliseconds>(end-start);
+				//auto end = high_resolution_clock::now();
+				//auto timeSpan = duration_cast<milliseconds>(end-start);
 				
 				cout << "The Highest Prime # within the given range is "
 				<< maxPrime << endl;
 				
 				//DEBUG
-				cout << "       ~~That took " << timeSpan.count()
-				<< " milliseconds~~        \n"<<endl;
+				/*cout << "       ~~That took " << timeSpan.count()
+				<< " milliseconds~~        \n"<<endl;*/
 				
 				cout << "Would you like the next Highest Prime #?(y/n) ";
 				cin >> nextMaxPrime;
