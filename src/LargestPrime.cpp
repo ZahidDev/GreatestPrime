@@ -1,10 +1,12 @@
 #include "LargestPrime.h"
 #include <math.h>
+#include <cstring>
 
 unsigned long long largestPrime(unsigned long long upperBound)	//Eratosthenes Sieve Algorithm
 {
     auto upperBoundSquareRoot = sqrt(upperBound);	//uses the sqrt of the upperBound(max) as minValue
     bool *isComposite = new bool[upperBound + 1];	//Bit array to mark composite #s
+    memset(isComposite, 0, (size_t) (sizeof(bool) * (upperBound + 1)));
     for (unsigned long long m = 2; m <= upperBoundSquareRoot; m++)
     {
         if (!isComposite[m])
