@@ -1,75 +1,70 @@
-#include <iostream>
+///////////DEBUG////////////
+#include <boost/chrono.hpp>
+////////////////////////////
 #include "isPrime.h"
 #include "LargestPrime.h"
-//DEBUG
-//#include <chrono>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::cin;
 
-int main()
-{
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	cout << "              Max Prime Finder V3.0b                 " << endl;
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
-	
-	char userContinue = 'y';
-	while(userContinue == 'y')
-	{
-		cout << "High Range #: ";
-		unsigned long long maxNum = 2;
-		cin >> maxNum;
-		while(maxNum < 1)
-		{
-			cout << "Input # Greater than 1: ";
-			cin >> maxNum;
-		}
-		
-		if(maxNum == 1)
-		{
-			cout << "1 is neither a prime nor a composite #" << endl;
-		}
-		else
-		{	
-			char nextMaxPrime = 'y';
-			while(nextMaxPrime == 'y')
-			{
-				//DEBUG
-				//using namespace std::chrono;
+int main() {
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "              Max Prime Finder V3.1b                 " << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
 
-				if(isPrime(maxNum)) {
-					cout<<"The number " << maxNum << " is prime"<<endl;
-				}
-				else cout<<"The number "<< maxNum << " isn't prime"<<endl;
+    char userContinue = 'y';
+    while (userContinue == 'y') {
+        cout << "Limit #: ";
+        int_fast64_t limitNum = 2;
+        cin >> limitNum;
 
-				//DEBUG
-				//auto start = high_resolution_clock::now();
+        while (limitNum < 1) {
+            cout << "Enter # that is greater than 0: ";
+            cin >> limitNum;
+        }
 
-				auto maxPrime = largestPrime(maxNum);
-			
-				//DEBUG				
-				//auto end = high_resolution_clock::now();
-				//auto timeSpan = duration_cast<milliseconds>(end-start);
-				
-				cout << "The Highest Prime # within the given range is "
-				<< maxPrime << endl;
-				
-				//DEBUG
-				/*cout << "       ~~That took " << timeSpan.count()
-				<< " milliseconds~~        \n"<<endl;*/
-				
-				cout << "Would you like the next Highest Prime #?(y/n) ";
-				cin >> nextMaxPrime;
-				cout << endl;
+        if (limitNum == 1) {
+            cout << "1 is neither a prime nor a composite #" << endl;
+        }
+        else {
+            char nextMaxPrime = 'y';
+            while (nextMaxPrime == 'y') {
+                if (isPrime(limitNum))
+                    cout << "The number " << limitNum << " is prime" << endl;
 
-				if(nextMaxPrime == 'y')
-					maxNum = maxPrime - 1;
-			}
-		}
-		
-		cout << "\nRestart?(y/n) ";
-		cin >> userContinue;
-		userContinue = tolower(userContinue);
-	}
-	
-	return 0;
+                else cout << "The number " << limitNum << " isn't prime" << endl;
+
+                //DEBUG
+                using namespace boost;
+                chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
+                auto maxPrime = largestPrime(limitNum);
+
+                //DEBUG
+                chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+                typedef chrono::duration<double> sec;
+                sec timeSpent = end - start;
+
+                cout << "The Highest Prime # within the given range is "
+                << maxPrime << endl;
+
+                //DEBUG
+                cout << "\n~~~~~ That took " << timeSpent << "  ~~~~\n" << endl;
+
+                cout << "Would you like the next Highest Prime #?(y/n) ";
+                cin >> nextMaxPrime;
+                cout << endl;
+
+                if (nextMaxPrime == 'y')
+                    limitNum = maxPrime - 1;
+            }
+        }
+
+        cout << "\nRestart?(y/n) ";
+        cin >> userContinue;
+        userContinue = (char) tolower(userContinue);
+    }
+
+    return 0;
 }
